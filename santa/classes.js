@@ -9,6 +9,9 @@ class Factory{
         this.manólist.push(manó);
         createRow(manó);
     }
+    createId(){
+        return this.manólist.length;
+    }
 }
 
 class Companion{

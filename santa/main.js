@@ -48,7 +48,7 @@ function initTable(){
     // TODO 6
     for(let i = 0 ; i < companionList.length ; i++) {
         const manó = new Companion(
-            i, 
+            factory.createId(), 
             companionList[i].firstName,
             companionList[i].lastName,
             companionList[i].area,
