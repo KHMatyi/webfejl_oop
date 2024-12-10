@@ -38,6 +38,13 @@ document.getElementById('product').addEventListener('submit',function(e){
     e.preventDefault();
     const form = e.currentTarget;
     addProductForm(form, factory)
+
+});
+
+document.getElementById('részlegform').addEventListener('submit',function(e){
+    e.preventDefault();
+    const form = e.currentTarget;
+    factory.addRészleglista(form.querySelector('#rtext').value);
 });
 
 /**
@@ -55,7 +62,6 @@ function initTable(){
             companionList[i].products
         );
         factory.addmaó(manó);
-        console.log(factory);
     }
 }
 
@@ -70,6 +76,21 @@ initTable()
  */
 function checkEventListener(e){
     const row = e.currentTarget.parentElement.parentElement;
-    const companionId = row.id;
+    const companionId = row.rowIndex-1;
     // TODO 10
+    refreshProductList(factory.manólist[companionId]);
+    
+    
+
 }
+
+function részlegfeltöltő(){
+    const selector = document.getElementById('carea');
+    selector.innerHTML = '';
+    for (i of factory.részleglista){
+        const option = document.createElement('option');
+        option.innerHTML = i;
+        selector.appendChild(option);
+    }
+}
+részlegfeltöltő()
