@@ -9,8 +9,13 @@ class ArrayList{
         this.#len = 0;
         this.#bigD = {};
     }
+    /**
+     * 
+     * @param {TableHTMLArray} array 
+     */
     constructor(array = undefined) {
-        this.#init()
+        this.#init();
+        this.#arrayTable = array;
     }
     Add(element){
         this.#bigD[this.#len] = element;
@@ -25,6 +30,9 @@ class ArrayList{
             enumerable: true,
         });
         this.#len++;
+        if (this.#arrayTable) {
+            this.#arrayTable.addPersonRow(element);
+        }
     }
     Clear(){
         this.#init()
@@ -50,7 +58,6 @@ class TableHTMLArray extends HTMLElement{
         
     }
     /**
-     * 
      * @param {{nev:String,eletkor:number}} v 
      */
     addPersonRow(v){
@@ -73,10 +80,16 @@ class TableHTMLArray extends HTMLElement{
         this.#thead = thead
         this.appendChild(t);
     }
-    
 }
 customElements.define("array-table",TableHTMLArray);
-const tb = new TableHTMLArray();
-document.body.appendChild(tb);
-tb.connectedCallback()
-tb.addPersonRow({nev:"hehe",eletkor:23})
+const ta = new TableHTMLArray();
+document.body.appendChild(ta);
+ta.connectedCallback()
+ta.addPersonRow({nev:"hehe",eletkor:23})
+
+const al = new ArrayList(ta);
+al.Add({nev:"hehe2",eletkor:24})
+
+function valami(){
+    al.Add({nev:"hehe2",eletkor:24});
+}
