@@ -50,7 +50,7 @@ class DataManager{
      * 
      * @param {Number} age 
      */
-    filterName(age){
+    filterAge(age){
         const results = [];
         for (const i of this.#array){
             if (i.eletkor == age){
