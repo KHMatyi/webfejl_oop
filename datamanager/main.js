@@ -59,6 +59,15 @@ class DataManager{
         }
         this.#updateCallback(results)
     }
+    filter(callb){
+        const results = [];
+        for (const i of this.#array){
+            if (callb(i)){
+                results.push(i);
+            }
+        }
+        this.#updateCallback(results)
+    }
 }
 class DataTable{
     /**
@@ -91,3 +100,21 @@ class DataTable{
 const data = [{nev:"jani",eletkor:34},{nev:"hehe",eletkor:334}]
 const dm = new DataManager(data);
 const dt = new DataTable(dm);
+
+const input = document.createElement("input");
+document.body.appendChild(input);
+input.type = "file";
+input.addEventListener("change",(e)=>{
+    const f = e.target.files;
+    const fr = new FileReader();
+    fr.readAsText(f[0]);
+    fr.onload = ()=>{
+        let Readf = fr.result;
+        Readf = Readf.split("\n");
+        for (const i of Readf){
+            const j = i.split(";");
+            const p = {nev:j[0] ,eletkor:Number(j[1])}
+            dm.add(p);
+        }
+    }
+})
